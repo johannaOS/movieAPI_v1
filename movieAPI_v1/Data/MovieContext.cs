@@ -1,6 +1,13 @@
 using Microsoft.EntityFrameworkCore;
+using movieAPI_v1.Models;
 
-public class MovieContext(DbContextOptions<MovieContext> options) : DbContext(options)
+namespace movieAPI_v1.Data
 {
-    public DbSet<movieAPI_v1.Models.Movie> Movie { get; set; } = default!;
+    public class MovieContext(DbContextOptions<MovieContext> options) : DbContext(options)
+    {
+        public DbSet<Movies> Movies { get; set; } = default!;
+        public DbSet<MovieDetails> MovieDetails { get; set; } = default!;
+        public DbSet<Review> Reviews { get; set; } = default!;
+        public DbSet<Actor> Actors { get; set; } = default!;
+    }
 }

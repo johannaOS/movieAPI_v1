@@ -1,6 +1,6 @@
 ﻿namespace movieAPI_v1.Models
 {
-    public class Movie
+    public class Movies
     {
         public int Id { get; set; }
         public string Title { get; set; } = "";

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using movieAPI_v1.Models;
+using movieAPI_v1.Data;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -14,16 +15,16 @@ public class MoviesController : ControllerBase
 
     // GET: api/Movie
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Movie>>> GetMovie()
+    public async Task<ActionResult<IEnumerable<Movies>>> GetMovie()
     {
-        return await _context.Movie.ToListAsync();
+        return await _context.Movies.ToListAsync();
     }
 
     // GET: api/Movie/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Movie>> GetMovie(int id)
+    public async Task<ActionResult<Movies>> GetMovie(int id)
     {
-        var movie = await _context.Movie.FindAsync(id);
+        var movie = await _context.Movies.FindAsync(id);
 
         if (movie == null)
         {
@@ -36,7 +37,7 @@ public class MoviesController : ControllerBase
     // PUT: api/Movie/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutMovie(int? id, Movie movie)
+    public async Task<IActionResult> PutMovie(int? id, Movies movie)
     {
         if (id != movie.Id)
         {
@@ -67,9 +68,9 @@ public class MoviesController : ControllerBase
     // POST: api/Movie
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<Movie>> PostMovie(Movie movie)
+    public async Task<ActionResult<Movies>> PostMovie(Movies movie)
     {
-        _context.Movie.Add(movie);
+        _context.Movies.Add(movie);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction("GetMovie", new { id = movie.Id }, movie);
@@ -79,13 +80,13 @@ public class MoviesController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteMovie(int? id)
     {
-        var movie = await _context.Movie.FindAsync(id);
+        var movie = await _context.Movies.FindAsync(id);
         if (movie == null)
         {
             return NotFound();
         }
 
-        _context.Movie.Remove(movie);
+        _context.Movies.Remove(movie);
         await _context.SaveChangesAsync();
 
         return NoContent();
@@ -93,6 +94,6 @@ public class MoviesController : ControllerBase
 
     private bool MovieExists(int? id)
     {
-        return _context.Movie.Any(e => e.Id == id);
+        return _context.Movies.Any(e => e.Id == id);
     }
 }

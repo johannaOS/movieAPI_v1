@@ -10,6 +10,6 @@ namespace movieAPI_v1.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Budget { get; set; }
         public int MovieId { get; set; }
-        public Movie? Movie { get; set; } = null!;
+        public Movies? Movie { get; set; } = null!;
     }
 }
